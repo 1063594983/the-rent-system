@@ -1,7 +1,7 @@
 <template>
     <div id="filter-menu">
         <span :class="filterItemClass[0]" @click="toggle(1)">附近<i :class="filterItemIconClass[0]"></i></span>
-        <span :class="filterItemClass[1]" @click="toggle(2)">智能排序<i :class="filterItemIconClass[1]"></i></span>
+        <span :class="filterItemClass[1]" @click="toggle(2)">{{ sortMethod }}<i :class="filterItemIconClass[1]"></i></span>
         <span :class="filterItemClass[2]" @click="toggle(3)">筛选<i :class="filterItemIconClass[2]"></i></span>
     </div>
 </template>
@@ -21,6 +21,11 @@ export default {
                 "el-icon-caret-bottom",
                 "el-icon-caret-bottom"
             ]
+        }
+    },
+    props: {
+        sortMethod: {
+            type: String
         }
     },
     computed: {

@@ -1,6 +1,6 @@
 <template>
   <div id="header">
-    <div class="left">
+    <div class="left" v-show="false">
       <i class="el-icon-arrow-left">返回</i>
     </div>
     <div class="title">

@@ -13,21 +13,23 @@
         </div>
     </div>
     <div v-show="panelIndex == 2" class="filter-panel-2">
-        <span>智能排序</span>
-        <span>离我最近</span>
-        <span>好评优先</span>
+        <span :class="[activeSortKey == 1 ? 'panel-2-item-active' : 'panel-2-item']" @click="selectSort(1)">智能排序</span>
+        <span :class="[activeSortKey == 2 ? 'panel-2-item-active' : 'panel-2-item']" @click="selectSort(2)">离我最近</span>
+        <span :class="[activeSortKey == 3 ? 'panel-2-item-active' : 'panel-2-item']" @click="selectSort(3)">好评优先</span>
     </div>
 </div>
     
 </template>
 
 <script>
+
 export default {
     data() {
         return {
             filterPanelClass: 'filter-panel-show',
             activePartKey: 1,
-            activePlaceKey: 1
+            activePlaceKey: 1,
+            activeSortKey: 1
         }
     },
     props: {
@@ -47,6 +49,11 @@ export default {
         },
         selectPlace(x) {
             this.activePlaceKey = x;
+        },
+        selectSort(x) {
+            this.activeSortKey = x;
+            this.$emit('selectSort', x);
+            console.log(x)
         }
     }
 }
@@ -68,6 +75,15 @@ export default {
     width: inherit;
     text-align: center;
     line-height: 30px;
+}
+
+.panel-2-item {
+    height: 50px;
+}
+
+.panel-2-item-active {
+    height: 50px;
+    color: green;
 }
 
 .left-menu {

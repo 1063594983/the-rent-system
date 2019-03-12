@@ -4,8 +4,8 @@
             <app-header></app-header>
         </div>
         <div>
-            <filter-menu @itemClick="handleClick"></filter-menu>
-            <filter-panel :class="filterPanelClass" :panel-content="content" :panel-index="panelIndex"></filter-panel>
+            <filter-menu @itemClick="handleClick" :sort-method="sortKeys[selectSortKey]"></filter-menu>
+            <filter-panel :class="filterPanelClass" :panel-content="content" :panel-index="panelIndex" @selectSort="handleSelectSort"></filter-panel>
         </div>
         <div>
             <rent-info-list :num="20"></rent-info-list>
@@ -28,6 +28,11 @@ var contents = [{
     title: '筛选'
 }]
 
+let sortKeys = [
+    "智能排序",
+    "离我最近",
+    "好评优先"
+]
 export default {
     data() {
         return {
@@ -35,8 +40,13 @@ export default {
             content: {
                 title: 'nihao'
             },
-            panelIndex: 1
+            panelIndex: 1,
+            sortKeys: sortKeys,
+            selectSortKey: 0
         }
+    },
+    created() {
+
     },
     methods: {
         handleClick(index, type) {
@@ -54,12 +64,10 @@ export default {
                     this.filterPanelClass = 'filter-panel';
                     break;
             }
-            /*
-            this.filterPanelClass == 'filter-panel-show' 
-                ? this.filterPanelClass = 'filter-panel' 
-                : this.filterPanelClass = 'filter-panel-show';
-            */
-            console.log(type + ' ' + index);
+        },
+        handleSelectSort(x) {
+            this.selectSortKey = x - 1;
+            //this.filterPanelClass = "filter-panel";
         }
     },
     components: {
@@ -95,7 +103,7 @@ export default {
     position: fixed;
     width: 100%;
     /*background: #ffffff;*/
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(238, 232, 232, 0.9);
     animation: myFirst 1s;
     /*overflow-y: scroll;*/
     overflow: hidden;
