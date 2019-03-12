@@ -61,19 +61,33 @@ export default {
     height: 40px;
     width: 100%;
     align-items: center;
-    justify-content: flex-start;
+    position: fixed;
+    border-bottom: 1px solid #eaeaea;
+    margin: -8px -8px 0;
+    padding: 0 8px;
+    z-index: 1000;
+    background-color: white;
+    box-sizing: border-box;
 }
 
 .left {
+    flex: 1;
     color: #909399;
 }
 
 .right {
+    flex: 1;
     color: #909399;
+    text-align: end;
 }
 
 .title {
-    margin: 0 auto;
+    flex: 1;
+    text-align: center;
+}
+
+.image-carousel {
+    padding-top: 46px;
 }
 
 @keyframes showMore {

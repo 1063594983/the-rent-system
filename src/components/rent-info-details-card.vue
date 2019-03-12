@@ -4,7 +4,6 @@
                 <div class="price">
                     <span class="price-number">{{ infoDetails.price }}</span>元/月(押一付三)
                 </div>
-                <hr>
                 <div class="info">
                     <div class="info-item">
                         <span class="info-font">{{ infoDetails.method }}</span><br>
@@ -19,7 +18,6 @@
                         <span class="info-tip">建筑面积</span>
                     </div>
                 </div>
-                <hr>
                 <div class="info">
                     <div class="info-item">
                         <span class="info-font">{{ infoDetails.direction }}</span><br>
@@ -34,7 +32,6 @@
                         <span class="info-tip">装修</span>
                     </div>
                 </div>
-                <hr>
                 <div class="address">
                     <div class="address-item">
                         <div class="address-item-title">
@@ -51,29 +48,27 @@
                         <div class="address-item-content">
                             {{ infoDetails.address }}
                         </div>
-                    </div> 
+                    </div>
                 </div>
-                <hr>
                 <div class="contact">
                     <div class="host-image">
                         <img :src="contactImage">
                     </div>
                     <div class="contact-details">
                         <div class="host-name">
-                            <div>XXX</div>
+                            <div>马云</div>
                             <div>
-                                <el-button>和Ta联系</el-button>
+                                <el-button size="small">和Ta联系</el-button>
                             </div>
                         </div>
                         <div class="ranking">
                             <el-rate :value="2" :disabled="true"></el-rate>
                         </div>
                         <div class="phone-number">
-                            dial: 183XXXX2818
+                            手机: 18312342818
                         </div>
                     </div>
                 </div>
-                <hr>
                 <div>
                     <el-button class="rent-btn" @click="dialogVisible = true">租赁</el-button>
                 </div>
@@ -88,12 +83,12 @@
                             <el-col :span="16">
                                 <el-date-picker v-model="startTime" type="date" placeholder="选择日期"></el-date-picker>
                             </el-col>
-                              
+
                         </div>
                         <br>
                         <div class="rent-details-item">
                             <el-col :span="8">
-                                租期(月): 
+                                租期(月):
                             </el-col>
                              <el-col :span="16"><el-input-number v-model="monthNum" :min="1" :max="12" label="月份"></el-input-number></el-col>
                         </div>
@@ -111,8 +106,8 @@
                             <el-button class="confirm-btn" @click="confirmOrder">确定订单</el-button>
                         </div>
                     </div>
-                   
-                
+
+
                 </el-dialog>
             </div>
         </div>
@@ -142,7 +137,7 @@ export default {
                     part: '南亭佳苑',
                     address: '金展路2146弄'
                 }
-                
+
             }
         }
     },
@@ -165,11 +160,14 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
 }
 
 .price-number {
     font-size: 30px;
-    color: red;
+    color: orangered;
+    margin-right: 8px;
 }
 
 .info {
@@ -178,27 +176,34 @@ export default {
     flex-direction: row;
     justify-content: space-around;
     align-items: flex-start;
+    margin: 20px 0;
+}
+
+.info-item {
+  flex: 1;
 }
 
 .info-font {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .info-tip {
-    font-size: 15px;
+    font-size: 12px;
     line-height: 10px;
     color: #909399;
 }
 
 .address {
-    height: 100px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    
+
 }
 
 .address-item {
+    padding: 10px 0;
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -206,12 +211,13 @@ export default {
 
 .address-item-title {
     width: 30%;
-    text-align: center;
     color: #909399;
 }
 
 .contact {
-    height: 120px;
+    border-top: 1px solid #eaeaea;
+    margin: 20px 0;
+    padding-top: 20px;
     display: flex;
     flex-direction: row;
     /*justify-content: flex-start;*/
@@ -237,6 +243,7 @@ export default {
 .contact-details {
     height: inherit;
     width: 70%;
+    padding: 0 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -252,12 +259,14 @@ export default {
 
 .phone-number {
     color: #909399;
+    margin-top: 10px;
 }
 
 .rent-btn {
     width: 100%;
     color: white;
     background: #5980ce;
+    border: none;
 }
 
 .rent-details {
@@ -272,8 +281,14 @@ export default {
     align-items: center;
 }
 
+.ranking {
+  margin-top: 10px;
+}
+
 .confirm-btn {
     width: 100%;
     background: rgb(47, 192, 192);
+    color: white;
+    border: none;
 }
 </style>
