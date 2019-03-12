@@ -34,7 +34,7 @@ export default new Router({
       component: UserIndex
     },
     {
-      path: '/rent-info-details',
+      path: '/rent-info-details/:id',
       name: 'rent-info-details',
       meta: {
         index: 4

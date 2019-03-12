@@ -8,7 +8,7 @@
             <filter-panel :class="filterPanelClass" :panel-content="content" :panel-index="panelIndex" @selectSort="handleSelectSort"></filter-panel>
         </div>
         <div>
-            <rent-info-list :num="20"></rent-info-list>
+            <rent-info-list :num="20" :card-list="cardList"></rent-info-list>
         </div>
     </div>
 </template>
@@ -19,6 +19,8 @@ import filterMenu from '@/components/filter-menu'
 import filterPanel from '@/components/filter-panel'
 import rentInfoCard from '@/components/rent-info-card'
 import rentInfoList from '@/components/rent-info-list'
+
+import cardList from '@/data/cardList.json'
 
 var contents = [{
     title: '附近'
@@ -42,7 +44,8 @@ export default {
             },
             panelIndex: 1,
             sortKeys: sortKeys,
-            selectSortKey: 0
+            selectSortKey: 0,
+            cardList
         }
     },
     created() {

@@ -1,17 +1,17 @@
 <template>
-  <div class="rent-info-card" @click="$router.push('/rent-info-details')">
+  <div class="rent-info-card" @click="$router.push('/rent-info-details/' + cardInfo.id)">
     <el-card>
       <div class="info-card">
         <div class="left">
-          <img src="../assets/logo.png" class="image">
+          <img :src="cardInfo.imgUrl" class="image">
         </div>
         <div class="right">
-          <div class="card-title">凡仔汉堡</div>
+          <div class="card-title">{{ cardInfo.title }}</div>
           <div class="place-info">
-              <div class="description">长风公园/华师大 两居室</div>
-              <div class="distance">1.4km</div>
+              <div class="description">{{ cardInfo.address }}</div>
+              <div class="distance">{{ cardInfo.distance }}</div>
           </div>
-        <div>价格</div>
+        <div>价格: {{ cardInfo.price }}元/月</div>
         </div>
       </div>
     </el-card>
@@ -19,7 +19,28 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      imgUrl: '../../static/image/house/h1-1.jpg'
+    }
+  },
+  props: {
+    cardInfo: {
+      type: Object,
+      default: () => {
+        return {
+          imgUrl: '../../static/image/house/h1-1.jpg',
+          title: '南亭佳苑 2室1厅1卫',
+          address: '金展路2146弄',
+          distance: '1.4km',
+          price: 1600,
+          id: 1
+        }
+      }
+    }
+  }
+};
 </script>
 
 <style scoped>

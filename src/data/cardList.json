@@ -1,0 +1,26 @@
+[
+    {
+        "imgUrl": "../../static/image/house/h1-1.jpg",
+        "title": "南亭佳苑 2室1厅1卫",
+        "address": "金展路2146弄",
+        "distance": "1.4km",
+        "price": 1600,
+        "id": 1
+    },
+    {
+        "imgUrl": "../../static/image/house/h2-1.jpg",
+        "title": "佘北家园惠泽苑 2室1厅1卫",
+        "address": "华莹山路300弄",
+        "distance": "1.4km",
+        "price": 2400,
+        "id": 2
+    },
+    {
+        "imgUrl": "../../static/image/house/h3-1.jpg",
+        "title": "威海路92閏弄小区 1室0厅1卫",
+        "address": "威海路92弄",
+        "distance": "1.4km",
+        "price": 3600,
+        "id": 3
+    }
+]

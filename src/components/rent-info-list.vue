@@ -1,6 +1,6 @@
 <template>
     <div class="rent-info-list" ref="infoList">
-        <rent-info-card v-for="x in num" :key="x"></rent-info-card>
+        <rent-info-card v-for="(x, index) in cardList" :key="index" :card-info="x"></rent-info-card>
     </div>
 </template>
 
@@ -12,6 +12,9 @@ export default {
         num: {
             type: Number,
             default: 5
+        },
+        cardList: {
+            type: Array
         }
     },
     mounted() {

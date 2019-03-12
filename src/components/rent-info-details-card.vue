@@ -2,32 +2,32 @@
     <div class="info-details">
             <el-card class="info-card">
                 <div class="price">
-                    <span class="price-number">15000</span>元/月(押一付三)
+                    <span class="price-number">{{ infoDetails.price }}</span>元/月(押一付三)
                 </div>
                 <hr>
                 <div class="info">
                     <div class="info-item">
-                        <span class="info-font">整租</span><br>
+                        <span class="info-font">{{ infoDetails.method }}</span><br>
                         <span class="info-tip">出租方式</span>
                     </div>
                     <div class="info-item">
-                        <span class="info-font">3室2厅2卫</span><br>
+                        <span class="info-font">{{ infoDetails.type }}</span><br>
                         <span class="info-tip">户型</span>
                     </div>
                     <div class="info-item">
-                        <span class="info-font">151平米</span><br>
+                        <span class="info-font">{{ infoDetails.area }}</span><br>
                         <span class="info-tip">建筑面积</span>
                     </div>
                 </div>
                 <hr>
                 <div class="info">
                     <div class="info-item">
-                        <span class="info-font">南北</span><br>
+                        <span class="info-font">{{ infoDetails.direction }}</span><br>
                         <span class="info-tip">朝向</span>
                     </div>
                     <div class="info-item">
                         <span class="info-font">高层</span><br>
-                        <span class="info-tip">楼层（共35层）</span>
+                        <span class="info-tip">楼层（共{{ infoDetails.height }}层）</span>
                     </div>
                     <div class="info-item">
                         <span class="info-font">精装修</span><br>
@@ -41,8 +41,7 @@
                             小区
                         </div>
                         <div class="address-item-content">
-                            汇豪天下 (浦东/陆家嘴)<br>
-                            距9号线商城路站约799米
+                            {{ infoDetails.part }}
                         </div>
                     </div>
                     <div class="address-item">
@@ -50,14 +49,14 @@
                             地址
                         </div>
                         <div class="address-item-content">
-                            商城路108弄
+                            {{ infoDetails.address }}
                         </div>
                     </div> 
                 </div>
                 <hr>
                 <div class="contact">
                     <div class="host-image">
-                        <img src="../assets/logo.png">
+                        <img src="../../static/image/head.png">
                     </div>
                     <div class="contact-details">
                         <div class="host-name">
@@ -80,7 +79,24 @@
 
 <script>
 export default {
-    
+    props: {
+        infoDetails: {
+            type: Object,
+            default: () => {
+                return {
+                    price: 1600,
+                    method: '整租',
+                    type: '2室1厅1卫',
+                    area: '15',
+                    direction: '南北',
+                    height: '10',
+                    part: '南亭佳苑',
+                    address: '金展路2146弄'
+                }
+                
+            }
+        }
+    }
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="rent-info-details">
+    <div class="rent-info-details" v-if="infoDetails != null">
         <div class="header">
             <div class="left">
                 <i class="el-icon-arrow-left" @click="$router.go(-1)">返回</i>
@@ -13,12 +13,12 @@
         </div>
         <div class="image-carousel">
             <el-carousel :interval="4000" type="card" height="200px">
-                <el-carousel-item v-for="item in 6" :key="item">
-                    <img src="../assets/logo.png" alt="">
+                <el-carousel-item v-for="item in infoDetails.imgNum" :key="item">
+                    <img :src="'../../static/image/house/h' + $route.params['id'] + '-' + item + '.jpg'">
                 </el-carousel-item>
             </el-carousel>
         </div>
-        <rent-info-details-card></rent-info-details-card>
+        <rent-info-details-card :info-details="infoDetails"></rent-info-details-card>
         <div v-if="isShowMore" class="more">
             More
         </div>
@@ -27,15 +27,16 @@
 
 <script>
 import rentInfoDetailsCard from '@/components/rent-info-details-card'
-
+import infoDetailsList from '@/data/infoDetails.json'
 export default {
     data() {
         return {
-            isShowMore: false
+            isShowMore: false,
+            infoDetails: null
         }
     },
     created() {
-        console.log(this.$Contract)
+        this.infoDetails = infoDetailsList[this.$route.params['id'] - 1];
         //this.$Contract.createUser("1", "2");
     },
     methods: {
@@ -93,5 +94,9 @@ export default {
     bottom: 0;
     background: white;
     z-index: 10;
+}
+
+img {
+    height: 100%;
 }
 </style>

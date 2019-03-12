@@ -1,0 +1,34 @@
+[{
+    "price": 1600,
+    "method": "整租",
+    "type": "2室1厅1卫",
+    "area": "15",
+    "direction": "南北",
+    "height": "10",
+    "part": "南亭佳苑",
+    "address": "金展路2146弄",
+    "id": 1,
+    "imgNum": 5
+}, {
+    "price": 2400,
+    "method": "整租",
+    "type": "2室1厅1卫",
+    "area": "20",
+    "direction": "南北",
+    "height": "15",
+    "part": "佘北家园",
+    "address": "华山路300弄",
+    "id": 2,
+    "imgNum": 4
+}, {
+    "price": 3600,
+    "method": "整租",
+    "type": "1室0厅0卫",
+    "area": "15",
+    "direction": "南",
+    "height": "4",
+    "part": "威海路92弄小区",
+    "address": "威海路92弄",
+    "id": 3,
+    "imgNum": 4
+}]
