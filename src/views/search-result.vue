@@ -11,16 +11,20 @@
                 </el-input>
             </div>
         </div>
-        <rent-info-list :num="10"></rent-info-list>
+        <rent-info-list :num="10" :card-list="cardList"></rent-info-list>
     </div>
 </template>
 
 <script>
 import rentInfoList from '@/components/rent-info-list'
+
+import cardList from '@/data/cardList.json'
+
 export default {
     data() {
         return {
-            searchWord: '搜索内容'
+            searchWord: '搜索内容',
+            cardList
         }
     },
     components: {

@@ -56,7 +56,7 @@
                 <hr>
                 <div class="contact">
                     <div class="host-image">
-                        <img src="../../static/image/head.png">
+                        <img :src="contactImage">
                     </div>
                     <div class="contact-details">
                         <div class="host-name">
@@ -79,6 +79,11 @@
 
 <script>
 export default {
+    data() {
+        return {
+            contactImage: '../../static/image/head.jpg'
+        }
+    },
     props: {
         infoDetails: {
             type: Object,
