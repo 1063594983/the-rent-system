@@ -18,7 +18,7 @@ export default {
         }
     },
     mounted() {
-        this.$refs['infoList'].style.height = (window.innerHeight - 100) + 'px';
+        this.$refs['infoList'].style.height = (window.innerHeight - 140) + 'px';
     },
     components: {
         rentInfoCard
