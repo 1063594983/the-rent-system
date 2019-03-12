@@ -203,7 +203,10 @@ export default {
   justify-content: space-around;
   align-items: center;
   position: fixed;
-  bottom: 5px;
+  bottom: 8px;
+  margin: 0 -8px;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 .footer-item {
@@ -215,6 +218,7 @@ export default {
 }
 
 .footer-item-active {
+  border-radius: 10px;
   display: flex;
   color: white;
   width: 33%;

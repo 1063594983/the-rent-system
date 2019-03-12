@@ -2,7 +2,7 @@
     <div class="info-details">
             <el-card class="info-card">
                 <div class="price">
-                    <span class="price-number">{{ infoDetails.price }}</span>元/月(押一付三)
+                    <span class="price-number">{{ infoDetails.price }}</span>元/月<span class="info-tip">(押一付三)</span>
                 </div>
                 <div class="info">
                     <div class="info-item">

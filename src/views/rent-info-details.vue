@@ -58,13 +58,13 @@ export default {
 .header {
     /*border: 1px solid red;*/
     display: flex;
-    height: 40px;
+    height: 56px;
     width: 100%;
     align-items: center;
     position: fixed;
     border-bottom: 1px solid #eaeaea;
     margin: -8px -8px 0;
-    padding: 0 8px;
+    padding: 0 16px;
     z-index: 1000;
     background-color: white;
     box-sizing: border-box;
@@ -87,7 +87,7 @@ export default {
 }
 
 .image-carousel {
-    padding-top: 46px;
+    padding-top: 60px;
 }
 
 @keyframes showMore {
