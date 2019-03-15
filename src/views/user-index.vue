@@ -60,7 +60,41 @@
         </div>
       </el-card>
     </div>
-    <div v-if="tableIndex == 3">table3</div>
+    <div v-if="tableIndex == 3">
+      <el-card class="user-bar">
+        <div class="user-info">
+          <div class="user-img">
+            <img style="width: 30%; height: 90%;" src="../../static/image/head.jpg">
+            <div class="username-panel">
+              <div class="username">用户名</div>
+              <div class="credit">信誉度: 良好<i class="el-icon-arrow-right"></i></div>
+            </div>
+          </div>
+          <div class="info-btn">
+            <el-button>个人资料</el-button>
+          </div>
+        </div>
+        <div class="user-tabs">
+          <div class="tab-item">
+            所有订单
+          </div>
+          |
+          <div class="tab-item">
+            我的收藏
+          </div>
+          |
+          <div class="tab-item">
+            最近浏览
+          </div>
+        </div>
+      </el-card>
+      <el-button class="release-order" @click="formVisible = true">
+        发布租房信息
+      </el-button>
+      <el-dialog title="发布租房信息" :visible.sync="formVisible" width="80%">
+        <order-form ></order-form>
+      </el-dialog>
+    </div>
     <div class="footer">
       <div
         :class="[activeFooterKey == 1 ? 'footer-item-active' : 'footer-item']"
@@ -90,6 +124,7 @@ import filterMenu from "@/components/filter-menu";
 import filterPanel from "@/components/filter-panel";
 import rentInfoCard from "@/components/rent-info-card";
 import rentInfoList from "@/components/rent-info-list";
+import orderForm from "@/components/order-form";
 
 import cardList from "@/data/cardList.json";
 
@@ -117,8 +152,8 @@ export default {
       sortKeys: sortKeys,
       selectSortKey: 0,
       cardList,
-      activeFooterKey: 1,
-      tableIndex: 1,
+      activeFooterKey: 3,
+      tableIndex: 3,
       cardInfo: {
         imgUrl: "../../static/image/house/h1-1.jpg",
         title: "南亭佳苑 2室1厅1卫",
@@ -126,7 +161,8 @@ export default {
         distance: "1.4km",
         price: 1600,
         id: 1
-      }
+      },
+      formVisible: false
     };
   },
   created() {},
@@ -157,7 +193,8 @@ export default {
     filterMenu,
     filterPanel,
     rentInfoCard,
-    rentInfoList
+    rentInfoList,
+    orderForm
   }
 };
 </script>
@@ -268,5 +305,60 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.user-bar {
+  height: 200px;
+}
+
+.user-info {
+  height: 120px;
+  width: 100%;
+  /*border: 1px solid red;*/
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-img {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.username-panel {
+  margin-left: 15px;
+}
+
+.username {
+  font-size: 20px;
+}
+
+.credit {
+  border: 1px solid gray;
+  display: block;
+  background-color: gray;
+  border-radius: 5px;
+  color: white;
+  font-size: 10px;
+}
+
+.user-tabs {
+  height: 50px;
+  width: 100%;
+  /*border: 1px solid red;*/
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.release-order {
+  margin-top: 20px;
+  width: 100%;
+  height: 50px;
+  background-color: rgb(47, 192, 192);
+  color: white;
 }
 </style>
