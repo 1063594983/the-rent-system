@@ -7,6 +7,7 @@ import Demo from '@/views/demo'
 import RentInfoDetails from '@/views/rent-info-details'
 import Search from '@/views/search'
 import SearchResult from '@/views/search-result'
+import ReleaseOrder from '@/views/release-order'
 Vue.use(Router)
 
 export default new Router({
@@ -61,6 +62,14 @@ export default new Router({
       path: '/demo',
       name: 'demo',
       component: Demo
+    },
+    {
+      path: '/release-order',
+      name: 'release-order',
+      meta: {
+        index: 2
+      },
+      component: ReleaseOrder
     }
   ]
 })

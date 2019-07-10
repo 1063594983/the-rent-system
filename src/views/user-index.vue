@@ -88,7 +88,12 @@
           </div>
         </div>
       </el-card>
+      <!--
       <el-button class="release-order" @click="formVisible = true">
+        发布租房信息
+      </el-button>
+      -->
+      <el-button class="release-order" @click="$router.push('release-order')">
         发布租房信息
       </el-button>
       <el-dialog title="发布租房信息" :visible.sync="formVisible" width="80%">
@@ -152,8 +157,8 @@ export default {
       sortKeys: sortKeys,
       selectSortKey: 0,
       cardList,
-      activeFooterKey: 3,
-      tableIndex: 3,
+      activeFooterKey: 1,
+      tableIndex: 1,
       cardInfo: {
         imgUrl: "../../static/image/house/h1-1.jpg",
         title: "南亭佳苑 2室1厅1卫",
