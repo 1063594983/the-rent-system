@@ -17,7 +17,7 @@ export default {
     props: {
         title: {
             type: String,
-            default: '未命名标题'
+            default: "未命名标题"
         },
         rightIcon: {
             type: String,

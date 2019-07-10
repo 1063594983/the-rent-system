@@ -16,7 +16,6 @@ export default {};
 
 <style scoped>
 .main .header {
-  border: 1px solid red;
   height: 56px;
   position: fixed;
   top: 0;
@@ -26,7 +25,6 @@ export default {};
 }
 
 .main .body {
-  border: 1px solid red;
   position: relative;
   width: 100%;
   top: 56px;

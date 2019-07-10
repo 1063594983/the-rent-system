@@ -1,4 +1,5 @@
 <template>
+<!--
     <div class="rent-info-details" v-if="infoDetails != null">
         <div class="header">
             <div class="left">
@@ -23,11 +24,33 @@
             More
         </div>
     </div>
+    -->
+    <up-down-layout>
+        <div slot="header">
+            <common-header title="租房信息" :right-method="() => {this.isShowMore = !this.isShowMore}"></common-header>
+        </div>
+        <div slot="body">
+            <div class="image-carousel">
+            <el-carousel :interval="4000" type="card" height="200px">
+                <el-carousel-item v-for="item in infoDetails.imgNum" :key="item">
+                    <img :src="'../../static/image/house/h' + $route.params['id'] + '-' + item + '.jpg'">
+                </el-carousel-item>
+            </el-carousel>
+        </div>
+        <rent-info-details-card :info-details="infoDetails"></rent-info-details-card>
+        <div v-if="isShowMore" class="more">
+            More
+        </div>
+        </div>
+    </up-down-layout>
 </template>
 
 <script>
 import rentInfoDetailsCard from '@/components/rent-info-details-card'
 import infoDetailsList from '@/data/infoDetails.json'
+
+import UpDownLayout from '@/components/up-down-layout'
+import CommonHeader from '@/components/common-header'
 export default {
     data() {
         return {
@@ -37,58 +60,17 @@ export default {
     },
     created() {
         this.infoDetails = infoDetailsList[this.$route.params['id'] - 1];
-        //this.$Contract.createUser("1", "2");
-    },
-    methods: {
-        onSlide(e) {
-            console.log(e);
-        }
     },
     components: {
-        rentInfoDetailsCard
+        rentInfoDetailsCard,
+        UpDownLayout,
+        CommonHeader
     }
 }
 </script>
 
 <style scoped>
-.rent-info-details {
-    /*text-align: center;*/
-}
 
-.header {
-    /*border: 1px solid red;*/
-    display: flex;
-    height: 56px;
-    width: 100%;
-    align-items: center;
-    position: fixed;
-    border-bottom: 1px solid #eaeaea;
-    margin: -8px -8px 0;
-    padding: 0 16px;
-    z-index: 1000;
-    background-color: white;
-    box-sizing: border-box;
-}
-
-.left {
-    flex: 1;
-    color: #909399;
-}
-
-.right {
-    flex: 1;
-    color: #909399;
-    text-align: end;
-}
-
-.title {
-    flex: 1;
-    text-align: center;
-}
-
-.image-carousel {
-    padding-top: 60px;
-}
 
 @keyframes showMore {
     from {

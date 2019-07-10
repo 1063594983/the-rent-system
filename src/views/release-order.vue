@@ -1,54 +1,30 @@
 <template>
-  <el-container>
-    <el-header class="el-header">
-      <div class="header">
-        <div class="left">
-          <i class="el-icon-arrow-left" @click="$router.go(-1)">返回</i>
-        </div>
-        <div class="title">
-          租房信息
-        </div>
-        <div class="right">
-          <i class="el-icon-more"></i>
-        </div>
+  <div>
+    <up-down-layout>
+      <div slot="header">
+        <common-header title="发布订单"></common-header>
       </div>
-    </el-header>
-    <el-main>
-      <order-form></order-form>
-    </el-main>
-  </el-container>
+      <div slot="body">
+          <order-form></order-form>
+      </div>
+    </up-down-layout>
+  </div>
 </template>
 
 <script>
-import OrderForm from "@/components/order-form";
+import UpDownLayout from "@/components/up-down-layout";
 import CommonHeader from "@/components/common-header";
+import OrderForm from '@/components/order-form'
 export default {
-  data() {
-    return {};
-  },
   components: {
-    OrderForm,
-    CommonHeader
+    UpDownLayout,
+    CommonHeader,
+    OrderForm
   }
 };
 </script>
 
+
 <style scoped>
-.el-header {
-    position: fixed;
-}
-.header {
-    border: 1px solid red;
-    display: flex;
-    height: 56px;
-    width: 100%;
-    align-items: center;
-    position: fixed;
-    border-bottom: 1px solid #eaeaea;
-    margin: -8px -8px 0;
-    padding: 0 16px;
-    z-index: 1000;
-    background-color: white;
-    box-sizing: border-box;
-}
+
 </style>
