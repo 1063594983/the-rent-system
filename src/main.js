@@ -14,7 +14,15 @@ Vue.use(ElementUI)
 Vue.config.productionTip = false
 //Vue.prototype.$Web3 = Web3;
 
+//import animate.css
+import animated from 'animate.css'
 
+Vue.use(animated)
+
+//import Velocity
+import Velocity from 'velocity-animate'
+
+Vue.prototype.$Velocity = Velocity;
 
 /* eslint-disable no-new */
 new Vue({
