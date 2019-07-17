@@ -1,12 +1,12 @@
 <template>
   <div class="header">
-    <div class="left">
+    <div :class="{'left' : true, 'hide' : !showBack}" >
       <i class="el-icon-arrow-left" @click="$router.go(-1)">返回</i>
     </div>
     <div class="title">
       <h4>{{ title }}</h4>
     </div>
-    <div class="right">
+    <div :class="{'right' : true, 'hide' : !showRight}">
       <i :class="rightIcon" @click="rightMethod"></i>
     </div>
   </div>
@@ -28,6 +28,14 @@ export default {
             default: () => {
                 console.log("default method")
             }
+        },
+        showBack: {
+          type: Boolean,
+          default: true
+        },
+        showRight: {
+          type: Boolean,
+          default: true
         }
     }
 };
@@ -59,5 +67,9 @@ export default {
 .title {
     flex: 1;
     text-align: center;
+}
+
+.hide {
+  visibility: hidden;
 }
 </style>

@@ -2,30 +2,30 @@
     <div class="info-details">
             <el-card class="info-card">
                 <div class="price">
-                    <span class="price-number">{{ infoDetails.price }}</span>元/月<span class="info-tip">(押一付三)</span>
+                    <span class="price-number">{{ infoDetails.monthly_rent }}</span>元/月<span class="info-tip">(押一付三)</span>
                 </div>
                 <div class="info">
                     <div class="info-item">
-                        <span class="info-font">{{ infoDetails.method }}</span><br>
+                        <span class="info-font">{{ infoDetails.details.rentMethod }}</span><br>
                         <span class="info-tip">出租方式</span>
                     </div>
                     <div class="info-item">
-                        <span class="info-font">{{ infoDetails.type }}</span><br>
+                        <span class="info-font">{{ infoDetails.details.type }}</span><br>
                         <span class="info-tip">户型</span>
                     </div>
                     <div class="info-item">
-                        <span class="info-font">{{ infoDetails.area }}</span><br>
+                        <span class="info-font">{{ infoDetails.details.area }}</span><br>
                         <span class="info-tip">建筑面积</span>
                     </div>
                 </div>
                 <div class="info">
                     <div class="info-item">
-                        <span class="info-font">{{ infoDetails.direction }}</span><br>
+                        <span class="info-font">{{ infoDetails.details.direction }}</span><br>
                         <span class="info-tip">朝向</span>
                     </div>
                     <div class="info-item">
                         <span class="info-font">高层</span><br>
-                        <span class="info-tip">楼层（共{{ infoDetails.height }}层）</span>
+                        <span class="info-tip">楼层（共{{ infoDetails.details.height }}层）</span>
                     </div>
                     <div class="info-item">
                         <span class="info-font">精装修</span><br>
@@ -38,7 +38,7 @@
                             小区
                         </div>
                         <div class="address-item-content">
-                            {{ infoDetails.part }}
+                            {{ infoDetails.details.part }}
                         </div>
                     </div>
                     <div class="address-item">
@@ -46,7 +46,7 @@
                             地址
                         </div>
                         <div class="address-item-content">
-                            {{ infoDetails.address }}
+                            {{ infoDetails.details.address }}
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                                 租金(元)
                             </el-col>
                             <el-col :span="16">
-                                <div style="font-size: 20px; color:red;">￥{{ infoDetails.price * monthNum }}</div>
+                                <div style="font-size: 20px; color:red;">￥{{ infoDetails.monthly_rent * monthNum }}</div>
                             </el-col>
                         </div>
                         <br>
@@ -120,7 +120,7 @@ export default {
             contactImage: '../../static/image/head.jpg',
             dialogVisible: false,
             startTime: '',
-            monthNum: ''
+            monthNum: 0
         }
     },
     props: {

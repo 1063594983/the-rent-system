@@ -1,5 +1,5 @@
 <template>
-    <div class="rent-info-list" ref="infoList">
+    <div class="rent-info-list" ref="infoList" @scroll="handleScroll($event)">
         <rent-info-card v-for="(x, index) in cardList" :key="index" :card-info="x"></rent-info-card>
     </div>
 </template>
@@ -9,16 +9,17 @@ import rentInfoCard from '@/components/rent-info-card';
 
 export default {
     props: {
-        num: {
-            type: Number,
-            default: 5
-        },
         cardList: {
             type: Array
         }
     },
     mounted() {
         this.$refs['infoList'].style.height = (window.innerHeight - 140) + 'px';
+    },
+    methods: {
+        handleScroll(e) {
+            this.$emit('onListScroll', e.srcElement.scrollTop);
+        }
     },
     components: {
         rentInfoCard

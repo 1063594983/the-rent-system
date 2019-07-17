@@ -2,7 +2,7 @@
     <div class="search">
         <div class="search-bar">
             <div class="left">
-                <i class="el-icon-arrow-left" @click="$router.push('/user-index')">返回</i>
+                <i class="el-icon-arrow-left" @click="$router.go(-1)">返回</i>
             </div>
             <div class="input">
                 <el-input placeholder="请输入搜索内容" 

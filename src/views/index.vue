@@ -38,7 +38,6 @@ export default {
   },
   watch: {
       tableIndex(newVal) {
-          console.log(this.urls[newVal])
           this.$router.push({
               name: this.urls[newVal]
           });
@@ -52,7 +51,6 @@ export default {
 
 <style scoped>
 .tab-content {
-  border: 1px solid red;
   margin-bottom: 60px;
 }
 

@@ -12,6 +12,9 @@
           </div>
           <div class="info-btn">
             <el-button>个人资料</el-button>
+            <el-button @click="$router.push({
+              name: 'user-login'
+            })">退出登录</el-button>
           </div>
         </div>
         <div class="user-tabs">

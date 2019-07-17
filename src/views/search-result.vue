@@ -11,13 +11,14 @@
                 </el-input>
             </div>
         </div>
+        <common-filter-menu></common-filter-menu>
         <rent-info-list :num="10" :card-list="cardList"></rent-info-list>
     </div>
 </template>
 
 <script>
 import rentInfoList from '@/components/rent-info-list'
-
+import CommonFilterMenu from '@/components/common-filter-menu'
 import cardList from '@/data/cardList.json'
 
 export default {
@@ -28,7 +29,8 @@ export default {
         }
     },
     components: {
-        rentInfoList
+        rentInfoList,
+        CommonFilterMenu
     }
 }
 </script>

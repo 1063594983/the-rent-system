@@ -1,15 +1,15 @@
 <template>
-  <div class="rent-info-card" @click="$router.push('/rent-info-details/' + cardInfo.id)">
+  <div class="rent-info-card" @click="$router.push('/rent-info-details/' + cardInfo.house_id)">
     <el-card>
       <div class="info-card">
         <div class="left">
-          <img :src="cardInfo.imgUrl" class="image">
+          <img src="../../static/image/house/h2-1.jpg" class="image">
         </div>
         <div class="right">
-          <div class="card-title">{{ cardInfo.title }}</div>
+          <div class="card-title">{{ cardInfo.details.area + " " + cardInfo.details.type }}</div>
           <div class="place-info">
-              <div class="description">{{ cardInfo.address }}</div>
-              <div class="distance">{{ cardInfo.distance }}</div>
+              <div class="description">{{ cardInfo.details.address }}</div>
+              <div class="distance"> 1.4 km </div>
           </div>
         <div class="price">价格: {{ cardInfo.price }}元/月</div>
         </div>
@@ -27,17 +27,7 @@ export default {
   },
   props: {
     cardInfo: {
-      type: Object,
-      default: () => {
-        return {
-          imgUrl: '../../static/image/house/h1-1.jpg',
-          title: '南亭佳苑 2室1厅1卫',
-          address: '金展路2146弄',
-          distance: '1.4km',
-          price: 1600,
-          id: 1
-        }
-      }
+      type: Object
     }
   }
 };

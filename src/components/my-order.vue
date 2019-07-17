@@ -1,7 +1,13 @@
 <template>
-  <div>
-
-    <div>
+  <up-down-layout>
+    <div slot="header">
+      <common-header :show-back="false" 
+            :show-right="false"
+            title="我的订单">
+      </common-header>
+    </div>
+    <div slot="body">
+      <div>
       <el-card>
         <div class="card">
           <div class="info-card">
@@ -25,11 +31,13 @@
         </div>
       </el-card>
     </div>
-  </div>
+    </div>
+  </up-down-layout>
 </template>
 
 <script>
-
+import UpDownLayout from '@/components/up-down-layout'
+import CommonHeader from '@/components/common-header'
 export default {
   data() {
     return {
@@ -42,6 +50,10 @@ export default {
         id: 1
       }
     };
+  },
+  components: {
+    UpDownLayout,
+    CommonHeader
   }
 };
 </script>

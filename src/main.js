@@ -24,6 +24,11 @@ import Velocity from 'velocity-animate'
 
 Vue.prototype.$Velocity = Velocity;
 
+//import axios
+import axios from 'axios'
+Vue.prototype.$axios = axios;
+//api 地址
+Vue.prototype.$api = "http://127.0.0.1:3000/api";
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -9,12 +9,12 @@
         @click="selectedMenu = index"
       >{{ menu.menu }}</div>
     </div>
-    <div v-if="isShow" :class="{'items' : true}">
+    <div v-show="isShow" :class="{'items' : true}">
       <div>
         <div
           v-for="(item, index) in selectedItems"
           :key="index"
-          :class="{'items-content' : true, 'animated fadeInUp' : finished}"
+          :class="{'items-content' : true, 'animated fadeInUp' : true}"
         >{{ item }}</div>
       </div>
     </div>
@@ -27,8 +27,7 @@ export default {
     return {
       selectedMenu: 0,
       selectedItems: [],
-      isShow: true,
-      finished: false
+      isShow: true
     };
   },
   props: {
@@ -50,18 +49,13 @@ export default {
     this.selectedItems = this.filterMenuList[this.selectedMenu].items;
   },
   updated() {
-    this.isShow = true;
+    //this.isShow = true;
   },
   watch: {
     selectedMenu(newVal, oldVal) {
       if (newVal == oldVal) {
         return;
       }
-      //start animate
-      this.finished = true;
-
-      this.isShow = false;
-
       this.selectedItems = this.filterMenuList[this.selectedMenu].items;
     }
   },
@@ -71,7 +65,6 @@ export default {
 
 <style scoped>
 .filter-panel {
-  height: 300px;
   display: flex;
   flex-direction: row;
   justify-content: start;

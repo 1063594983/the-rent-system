@@ -1,46 +1,40 @@
 <template>
   <div>
-    <div>
-      <div>
-        <app-header></app-header>
+    <up-down-layout>
+      <div slot="header">
+        <div>
+          <common-header
+            :show-back="false"
+            :right-method="search"
+            right-icon="el-icon-search"
+            title="房源"
+          ></common-header>
+        </div>
       </div>
-      <div>
-        <filter-menu @itemClick="handleClick" :sort-method="sortKeys[selectSortKey]"></filter-menu>
-        <filter-panel
-          :class="filterPanelClass"
-          :panel-content="content"
-          :panel-index="panelIndex"
-          @selectSort="handleSelectSort"
-        ></filter-panel>
+      <div slot="body">
+        <div class="filter-menu">
+          <common-filter-menu></common-filter-menu>
+        </div>
+        <div>
+          <common-scroll :on-refresh="onRefresh">
+            <div slot="content">
+              <rent-info-list :num="cardList.length" :card-list="cardList"></rent-info-list>
+            </div>
+          </common-scroll>
+          
+        </div>
       </div>
-      <div>
-        <rent-info-list :num="20" :card-list="cardList"></rent-info-list>
-      </div>
-    </div>
+    </up-down-layout>
   </div>
 </template>
 
 <script>
-import appHeader from "@/components/header";
-import filterMenu from "@/components/filter-menu";
-import filterPanel from "@/components/filter-panel";
 import rentInfoList from "@/components/rent-info-list";
+import CommonHeader from "@/components/common-header";
+import CommonFilterMenu from "@/components/common-filter-menu";
+import CommonScroll from '@/components/common-scroll'
+import UpDownLayout from "@/components/up-down-layout";
 
-import cardList from "@/data/cardList.json";
-
-var contents = [
-  {
-    title: "附近"
-  },
-  {
-    title: "智能排序"
-  },
-  {
-    title: "筛选"
-  }
-];
-
-let sortKeys = ["智能排序", "离我最近", "好评优先"];
 export default {
   data() {
     return {
@@ -49,68 +43,58 @@ export default {
         title: "nihao"
       },
       panelIndex: 1,
-      sortKeys: sortKeys,
       selectSortKey: 0,
-      cardList,
+      cardList: []
     };
   },
-  created() {},
-  methods: {
-    handleClick(index, type) {
-      switch (type) {
-        case "open":
-          this.filterPanelClass = "filter-panel-show";
-          this.content = contents[index - 1];
-          this.panelIndex = index;
-          break;
-        case "switch":
-          this.content = contents[index - 1];
-          this.panelIndex = index;
-          break;
-        case "close":
-          this.filterPanelClass = "filter-panel";
-          break;
+  created() {
+    this.$axios.get(this.$api + "/house/getHouse", {
+      params: {
+        size: 20
       }
+    }).then(res => {
+      this.cardList = res.data;
+    })
+  },
+  methods: {
+    search() {
+      this.$router.push({
+        name: "search"
+      });
     },
-    handleSelectSort(x) {
-      this.selectSortKey = x - 1;
+    onRefresh(done) {
+      this.$axios.get(this.$api + "/house/getHouseAfter", { 
+        params: {
+          release_time: this.cardList[0].release_time
+        }
+      }).then(res => {
+        res.data.forEach(element => {
+          this.cardList.unshift(element)
+        });
+        done();
+        if(res.data.length == 0) {
+          this.$message({
+          message: "无新租房信息"
+        })
+        } else {
+          this.$message({
+            message: res.data.length + "条新租房信息",
+            type: 'success'
+          })
+        }
+        
+      })
     }
   },
   components: {
-    appHeader,
-    filterMenu,
-    filterPanel,
-    rentInfoList
+    rentInfoList,
+    CommonHeader,
+    CommonFilterMenu,
+    UpDownLayout,
+    CommonScroll
   }
 };
 </script>
 
 <style scoped>
-@keyframes myFirst {
-  from {
-    height: 0px;
-  }
-
-  to {
-    height: 200px;
-  }
-}
-
-.filter-panel {
-  display: none;
-}
-
-.filter-panel-show {
-  /*border: 1px solid red;*/
-  display: block;
-  /*height: 200px;*/
-  position: fixed;
-  width: 100%;
-  /*background: #ffffff;*/
-  background: rgba(238, 232, 232, 0.9);
-  animation: myFirst 1s;
-  /*overflow-y: scroll;*/
-  overflow: hidden;
-}
-
 </style>

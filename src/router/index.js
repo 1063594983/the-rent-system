@@ -5,6 +5,7 @@ import Index from '@/views/index'
 import UserLogin from '@/views/user-login'
 import UserIndex from '@/views/user-index'
 import Demo from '@/views/demo'
+import Demo2 from '@/views/demo2'
 import RentInfoDetails from '@/views/rent-info-details'
 import Search from '@/views/search'
 import SearchResult from '@/views/search-result'
@@ -21,7 +22,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
+      name: 'indexPage',
       redirect: '/index'
     },
     {
@@ -96,6 +97,14 @@ export default new Router({
         index: 1
       },
       component: Demo
+    },
+    {
+      path: '/demo2',
+      name: 'demo2',
+      meta: {
+        index: 1
+      },
+      component: Demo2
     },
     {
       path: '/release-order',
