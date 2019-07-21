@@ -6,7 +6,7 @@
           <img src="../../static/image/house/h2-1.jpg" class="image">
         </div>
         <div class="right">
-          <div class="card-title">{{ cardInfo.details.area + " " + cardInfo.details.type }}</div>
+          <div class="card-title">{{ cardInfo.details.part + " " + cardInfo.details.type }}</div>
           <div class="place-info">
               <div class="description">{{ cardInfo.details.address }}</div>
               <div class="distance"> 1.4 km </div>

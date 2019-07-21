@@ -52,8 +52,6 @@ export default {
     handleMove(e) {
       let scrollTop = this.$refs.drag_panel.children[0].firstChild.scrollTop;
       if (scrollTop == 0) {
-        //this.touching = true;
-        //this.startY = e.targetTouches[0].pageY;
       }
       if (!this.touching) {
         return;

@@ -69,47 +69,8 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <el-button class="rent-btn" @click="dialogVisible = true">租赁</el-button>
-                </div>
+                
             </el-card>
-            <div>
-                <el-dialog top="60%" :visible.sync = "dialogVisible" title="详情" width="80%">
-                    <div class="rent-details">
-                        <div class="rent-details-item">
-                            <el-col :span="8">
-                                开始时间:
-                            </el-col>
-                            <el-col :span="16">
-                                <el-date-picker v-model="startTime" type="date" placeholder="选择日期"></el-date-picker>
-                            </el-col>
-
-                        </div>
-                        <br>
-                        <div class="rent-details-item">
-                            <el-col :span="8">
-                                租期(月):
-                            </el-col>
-                             <el-col :span="16"><el-input-number v-model="monthNum" :min="1" :max="12" label="月份"></el-input-number></el-col>
-                        </div>
-                        <br>
-                        <div class="rent-details-item">
-                            <el-col :span="8">
-                                租金(元)
-                            </el-col>
-                            <el-col :span="16">
-                                <div style="font-size: 20px; color:red;">￥{{ infoDetails.monthly_rent * monthNum }}</div>
-                            </el-col>
-                        </div>
-                        <br>
-                        <div>
-                            <el-button class="confirm-btn" @click="confirmOrder">确定订单</el-button>
-                        </div>
-                    </div>
-
-
-                </el-dialog>
-            </div>
         </div>
 </template>
 
@@ -152,6 +113,7 @@ export default {
                 startTime: new Date(this.startTime).getTime(),
                 monthNum: this.monthNum
             })
+            
         }
     }
 }
@@ -160,7 +122,7 @@ export default {
 <style scoped>
 
 .info-card {
-    height: 600px;
+    height: 450px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -224,8 +186,6 @@ export default {
     padding-top: 20px;
     display: flex;
     flex-direction: row;
-    /*justify-content: flex-start;*/
-    /*border: 1px solid red;*/
 }
 
 .host-image {
@@ -264,13 +224,6 @@ export default {
 .phone-number {
     color: #909399;
     margin-top: 10px;
-}
-
-.rent-btn {
-    width: 100%;
-    color: white;
-    background: #5980ce;
-    border: none;
 }
 
 .rent-details {

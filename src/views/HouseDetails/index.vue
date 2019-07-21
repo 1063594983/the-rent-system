@@ -1,24 +1,35 @@
 <template>
-  <up-down-layout>
-    <div slot="header">
-      <common-header title="租房信息" :right-method="() => {this.isShowMore = !this.isShowMore}"></common-header>
-    </div>
-    <div slot="body">
-      <div class="image-carousel">
-        <el-carousel :interval="4000" type="card" height="200px">
-          <el-carousel-item v-for="item in 3" :key="item">
-            <img :src="'../../../static/image/house/h1-' + item + '.jpg'" />
-          </el-carousel-item>
-        </el-carousel>
+  <div>
+    <up-down-layout>
+      <!-- 头部 -->
+      <div slot="header">
+        <common-header title="租房信息" :right-method="() => {this.isShowMore = !this.isShowMore}"></common-header>
       </div>
-      <rent-info-details-card
-        :info-details="infoDetails"
-        v-if="finished"
-        @onOrderSubmit="handleSubmit"
-      ></rent-info-details-card>
+      <!-- 内容 -->
+      <div slot="body">
+        <!-- 轮播图 -->
+        <div class="image-carousel">
+          <el-carousel :interval="4000" type="card" height="200px">
+            <el-carousel-item v-for="item in 3" :key="item">
+              <img :src="'../../../static/image/house/h1-' + item + '.jpg'" />
+            </el-carousel-item>
+          </el-carousel>
+        </div>
+        <!-- 房屋详细信息、房东信息及联系面板 -->
+        <rent-info-details-card :info-details="infoDetails" v-if="finished"></rent-info-details-card>
+        <!-- 租赁按钮 -->
+        <el-button class="rent-btn" type="text" @click="dialogVisible = true">租赁</el-button>
+      </div>
+      
+    </up-down-layout>
+    <!-- 租赁表单弹出框 -->
+      <el-dialog :visible.sync="dialogVisible" title="租赁" width="80%">
+        <!-- 租赁表单 -->
+        <rent-form :monthly-rent="infoDetails.monthly_rent" @onSubmit="handleSubmit"></rent-form>
+      </el-dialog>
+      <!-- 更多面板 -->
       <div v-if="isShowMore" class="more">More</div>
-    </div>
-  </up-down-layout>
+  </div>
 </template>
 
 <script>
@@ -27,12 +38,16 @@ import infoDetailsList from "@/data/infoDetails.json";
 
 import UpDownLayout from "@/components/up-down-layout";
 import CommonHeader from "@/components/common-header";
+import RentForm from "./rent-form";
 export default {
   data() {
     return {
       isShowMore: false,
       infoDetails: {},
-      finished: false
+      finished: false,
+      dialogVisible: false,
+      monthNum: 1,
+      startTime: new Date()
     };
   },
   created() {
@@ -60,13 +75,15 @@ export default {
         if (res.data == "Success") {
           this.$message({
             message: "租赁成功",
-            type: 'success'
-          })
+            type: "success"
+          });
+          this.dialogVisible = false;
         } else {
           this.$message({
             message: "租赁失败",
-            type: 'error'
-          })
+            type: "error"
+          });
+          this.dialogVisible = false;
         }
       });
     }
@@ -74,7 +91,8 @@ export default {
   components: {
     rentInfoDetailsCard,
     UpDownLayout,
-    CommonHeader
+    CommonHeader,
+    RentForm
   }
 };
 </script>
@@ -102,5 +120,12 @@ export default {
 
 img {
   height: 100%;
+}
+
+.rent-btn {
+  width: 100%;
+  color: white;
+  background: #5980ce;
+  border: none;
 }
 </style>
