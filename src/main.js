@@ -29,7 +29,21 @@ import axios from 'axios'
 Vue.prototype.$axios = axios;
 //api 地址
 Vue.prototype.$api = "http://127.0.0.1:3000/api";
+
+//import baidu-map
+import BaiduMap from 'vue-baidu-map'
+
+Vue.use(BaiduMap, {
+  ak: 'k2EYGytzdGHZanU2b3HRWiY6Bby1GNjt'
+})
+
+import VueJsonp from 'vue-jsonp'
+Vue.use(VueJsonp)
 /* eslint-disable no-new */
+
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
+
 new Vue({
   el: '#app',
   router,

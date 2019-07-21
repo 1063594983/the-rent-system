@@ -12,17 +12,12 @@
         </div>
       </div>
       <div slot="body">
-        <div class="filter-menu">
-          <common-filter-menu></common-filter-menu>
-        </div>
-        <div>
-          <common-scroll :on-refresh="onRefresh">
+        <common-filter-menu></common-filter-menu>
+        <common-scroll :on-refresh="onRefresh">
             <div slot="content">
               <rent-info-list :num="cardList.length" :card-list="cardList"></rent-info-list>
             </div>
           </common-scroll>
-          
-        </div>
       </div>
     </up-down-layout>
   </div>

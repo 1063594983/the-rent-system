@@ -6,7 +6,7 @@
           <div class="user-img">
             <img style="width: 30%; height: 90%;" src="../../static/image/head.jpg">
             <div class="username-panel">
-              <div class="username">用户名</div>
+              <div class="username">{{ $cookies.get("username") }}</div>
               <div class="credit">信誉度: 良好<i class="el-icon-arrow-right"></i></div>
             </div>
           </div>

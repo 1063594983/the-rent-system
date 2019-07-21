@@ -148,6 +148,10 @@ export default {
     methods: {
         confirmOrder() {
             this.dialogVisible = false;
+            this.$emit("onOrderSubmit", {
+                startTime: new Date(this.startTime).getTime(),
+                monthNum: this.monthNum
+            })
         }
     }
 }

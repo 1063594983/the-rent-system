@@ -11,7 +11,7 @@
               <div class="description">{{ cardInfo.details.address }}</div>
               <div class="distance"> 1.4 km </div>
           </div>
-        <div class="price">价格: {{ cardInfo.price }}元/月</div>
+        <div class="price">价格: {{ cardInfo.monthly_rent }}元/月</div>
         </div>
       </div>
     </el-card>

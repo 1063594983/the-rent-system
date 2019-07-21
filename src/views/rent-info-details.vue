@@ -11,7 +11,11 @@
           </el-carousel-item>
         </el-carousel>
       </div>
-      <rent-info-details-card :info-details="infoDetails" v-if="finished"></rent-info-details-card>
+      <rent-info-details-card
+        :info-details="infoDetails"
+        v-if="finished"
+        @onOrderSubmit="handleSubmit"
+      ></rent-info-details-card>
       <div v-if="isShowMore" class="more">More</div>
     </div>
   </up-down-layout>
@@ -32,17 +36,40 @@ export default {
     };
   },
   created() {
-    this.$axios.get(
-      this.$api + "/house/getHouseById",
-      {
+    this.$axios
+      .get(this.$api + "/house/getHouseById", {
         params: {
           house_id: this.$route.params["id"]
         }
-      }
-    ).then(res => {
-      this.infoDetails = res.data;
-      this.finished = true;
-    });
+      })
+      .then(res => {
+        this.infoDetails = res.data;
+        this.finished = true;
+      });
+  },
+  methods: {
+    handleSubmit(option) {
+      var options = {
+        house_id: this.$route.params["id"],
+        renter: this.$cookies.get("username"),
+        start_time: option.startTime,
+        lasting_months: option.monthNum,
+        total_money: option.monthNum * this.infoDetails.monthly_rent
+      };
+      this.$axios.post(this.$api + "/order/addOrder", options).then(res => {
+        if (res.data == "Success") {
+          this.$message({
+            message: "租赁成功",
+            type: 'success'
+          })
+        } else {
+          this.$message({
+            message: "租赁失败",
+            type: 'error'
+          })
+        }
+      });
+    }
   },
   components: {
     rentInfoDetailsCard,

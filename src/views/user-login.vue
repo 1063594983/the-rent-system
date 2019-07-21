@@ -2,13 +2,11 @@
   <div>
     <up-down-layout>
       <div slot="header">
-        <common-header title="用户登录" 
-          :show-back="false" :show-right="false"></common-header>
+        <common-header title="用户登录" :show-back="false" :show-right="false"></common-header>
       </div>
       <div slot="body">
         <div id="user-login">
-          <el-form ref="user-login" :model="formFiled" 
-            :rules="rules" label-width="80px">
+          <el-form ref="user-login" :model="formFiled" :rules="rules" label-width="80px">
             <el-form-item label="用户名" prop="username">
               <el-input v-model="formFiled.username"></el-input>
             </el-form-item>
@@ -36,16 +34,18 @@ export default {
         password: ""
       },
       rules: {
-        username: [{
-          required: true,
-          message: "用户名不能为空",
-          trigger: 'blur'
-        }],
+        username: [
+          {
+            required: true,
+            message: "用户名不能为空",
+            trigger: "blur"
+          }
+        ],
         password: [
           {
             required: true,
             message: "密码不能为空",
-            trigger: 'blur'
+            trigger: "blur"
           }
         ]
       }
@@ -55,9 +55,25 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$router.push({
-            name: 'index'
-          })
+          this.$axios
+            .post(this.$api + "/user/login", {
+              username: this.formFiled.username,
+              password: this.formFiled.password
+            })
+            .then(res => {
+              if (res.data == "Success") {
+                this.$cookies.set("username", this.formFiled.username);
+                this.$router.push({
+                  name: "index"
+                });
+                
+              } else {
+                this.$message({
+                  message: "用户名或密码错误",
+                  type: 'error'
+                })
+              }
+            });
         } else {
           return false;
         }

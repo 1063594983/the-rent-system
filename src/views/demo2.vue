@@ -1,110 +1,150 @@
 <template>
   <div>
-    <div class="tip" :style="{height: top + 'px'}" v-if="state != 0">
-      <div class="tip-text">{{ tip }}</div>
-    </div>
-    <div
-      class="drag-panel"
-      @touchstart="handleStart($event)"
-      @touchmove="handleMove($event)"
-      @touchend="handleEnd($event)"
-      @scroll="handleScroll($event)"
-      :style="{'transform': 'translateY(' + top + 'px)'}"
-      ref="drag_panel" 
-    >
-    <div v-for="x in 100" :key="x">{{ x }}</div>
+    <demo @onSelectMenu="handleSelect"></demo>
+    <div>
+      <div class="filter-panel" ref="panel">
+        <div class="menu">
+          <div
+            v-for="(menu, index) in filterMenuList"
+            :key="index"
+            class="menu-item"
+            :class="{'active' : selectedMenu == index}"
+            @click="selectedMenu = index"
+          >{{ menu.menu }}</div>
+        </div>
+        <div class="items">
+          <div>
+            <div
+              v-for="(item, index) in selectedItems"
+              :key="index"
+              :class="{'items-content' : true, 'animated fadeInUp' : true}"
+            >{{ item }}</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import MyScroll from "@/components/scroll";
-/**
- * state: 0 - 初始 1 - 下拉 2 - 可释放 3 - 刷新
- */
+import Demo from "@/components/demo";
+import Demo2 from "@/components/demo-component";
 export default {
   data() {
     return {
-      startY: 0,
-      touching: false,
-      top: 0,
-      state: 0,
-      tip: "下拉"
+      height: [200, 300, 100],
+      filterMenuList: [
+        {
+          menu: "附近",
+          items: ["附近", "500", "1km"]
+        },
+        {
+          menu: "临川区",
+          items: ["全部", "人民公园"]
+        }
+      ],
+      selectedMenu: 0,
+      isItemShow: true
     };
   },
-  methods: {
-     handleScroll(e) {
-         console.log(e)
-     },
-    handleStart(e) {
-      this.startY = e.targetTouches[0].pageY;
-      this.touching = true;
-      console.log(this.$refs.drag_panel)
-    },
-    handleMove(e) {
-      if (!this.touching) {
-        return;
-      }
-
-      let diff = e.targetTouches[0].pageY - this.startY;
-      if (diff > 0) {
-        e.preventDefault();
-      } else {
-        return;
-      }
-
-      this.state = 1; //下拉开始
-      this.top = Math.floor(diff * 0.25) + (this.state === 2 ? 40 : 0);
-
-      if (this.top > 40) {
-        this.state = 2; //可释放
-      }
-    },
-    handleEnd(e) {
-      this.touching = false; // 判断抬起时的高度，是大于40 就开启刷新
-
-      if (this.top >= 40) {
-        this.refresh();
-      } else {
-        this.state = 0;
-        this.top = 0;
-      }
-    },
-    refresh() {
-      this.state = 3; //正在刷新
-      setTimeout(() => {
-        this.state = 0; //刷新完成，回到初始状态
-        this.top = 0;
-      }, 100);
+  computed: {
+    selectedItems() {
+      this.isItemShow = false;
+      this.isItemShow = true;
+      return this.filterMenuList[this.selectedMenu].items;
     }
   },
-  watch: {
-    state(newVal) {
-      switch (newVal) {
-        case 1:
-          this.tip = "下拉刷新";
-          return;
-        case 2:
-          this.tip = "释放立即刷新";
-          return;
-        case 3:
-          this.tip = "正在刷新";
-          return;
+  methods: {
+    handleSelect(option) {
+      var el = this.$refs.panel;
+      switch (option.type) {
+        case "open":
+          this.switchTo(el, option.index);
+          break;
+        case "close":
+          this.slideIn(el);
+          break;
+        case "switch":
+          this.switchTo(el, option.index);
+          break;
       }
+    },
+    switchTo(el, index) {
+      el.style.display = "flex";
+      this.$Velocity(
+        el,
+        {
+          height: this.height[index]
+        },
+        {
+          duration: 300
+        }
+      );
+    },
+    slideIn(el) {
+      this.$Velocity(
+        el,
+        {
+          height: 0
+        },
+        {
+          duration: 300
+        }
+      ).then(element => {
+        el.style.display = "none";
+      });
     }
   },
   components: {
-    MyScroll
+    Demo,
+    Demo2
   }
 };
 </script>
 
 <style scoped>
-.tip {
-  text-align: center;
+.filter-panel {
+  display: none;
+  flex-direction: row;
+  justify-content: start;
+  box-shadow: 2px 2px 3px #888888;
+
+  position: fixed;
+  margin-top: 10px;
+  width: 100%;
+  left: 0;
 }
-.drag-panel {
-  border: 1px solid red;
-  overflow-y: scroll;
+
+.filter-panel .menu {
+  overflow-y: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-panel .menu .menu-item {
+  display: block;
+  padding-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.active {
+  color: red;
+}
+
+.filter-panel .items {
+  overflow-y: hidden;
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-panel .items .items-content {
+  display: block;
+
+  padding-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 </style>

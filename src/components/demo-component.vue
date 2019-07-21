@@ -1,58 +1,25 @@
 <template>
-  <div class="main">
-    <el-form ref="order-form" :model="form">
-      <el-form-item label="租金(元/月">
-        <el-input v-model="form.price"></el-input>
-      </el-form-item>
-
-      <el-form-item label="租赁模式">
-        <el-radio-group v-model="form.payMethod" size="medium">
-          <el-radio label="押一付三"></el-radio>
-          <el-radio label="押一付五"></el-radio>
-          <el-radio label="无押金"></el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="出租方式">
-        <el-radio-group v-model="form.rentMethod" size="medium">
-          <el-radio label="整租"></el-radio>
-          <el-radio label="单租"></el-radio>
-          <el-radio label="其他"></el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="户型">
-        <el-input v-model="form.type" placeholder="?室?厅?卫"></el-input>
-      </el-form-item>
-
-      <el-form-item label="朝向">
-        <el-radio-group v-model="form.direction" size="medium">
-          <el-radio label="南北"></el-radio>
-          <el-radio label="东西"></el-radio>
-          <el-radio label="其他"></el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-col :span="10">
-        <el-form-item label="建筑面积(平方米)">
-          <el-input v-model="form.area"></el-input>
-        </el-form-item>
-      </el-col>
-      <el-col :span="10" :offset="4">
-        <el-form-item label="楼层">
-          <el-input v-model="form.height"></el-input>
-        </el-form-item>
-      </el-col>
-      <el-form-item label="小区">
-        <el-input v-model="form.part"></el-input>
-      </el-form-item>
-      <el-form-item label="地址">
-        <el-input v-model="form.address"></el-input>
-      </el-form-item>
-      <el-form-item label="其他">
-        <el-input type="textarea" v-model="form.other"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">立即发布</el-button>
-      </el-form-item>
-    </el-form>
+  <div>
+    <div class="filter-panel" ref="panel">
+      <div class="menu">
+        <div
+          v-for="(menu, index) in filterMenuList"
+          :key="index"
+          class="menu-item"
+          :class="{'active' : selectedMenu == index}"
+          @click="selectedMenu = index"
+        >{{ menu.menu }}</div>
+      </div>
+      <div v-if="isItemShow" class="items">
+        <div>
+          <div
+            v-for="(item, index) in selectedItems"
+            :key="index"
+            :class="{'items-content' : true, 'animated fadeInUp' : true}"
+          >{{ item }}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -60,28 +27,219 @@
 export default {
   data() {
     return {
-      form: {
-        price: "",
-        payMethod: "押一付三",
-        rentMethod: "整租",
-        type: "",
-        area: "",
-        direction: "南北",
-        height: "",
-        part: "",
-        address: "",
-        other: ""
-      }
+      activeIndex: 0,
+      filterItemClass: ["filter-item", "filter-item", "filter-item"],
+      filterItemIconClass: [
+        "el-icon-caret-bottom",
+        "el-icon-caret-bottom",
+        "el-icon-caret-bottom"
+      ],
+      isShow: false,
+      selectedMenu: 0,
+      selectedItems: [],
+      isItemShow: true
     };
   },
+  props: {
+    sortMethod: {
+      type: String,
+      default: "智能排序"
+    },
+    filterMenuList: {
+      type: Array,
+      default: () => [
+        {
+          menu: "附近",
+          items: ["附近", "500", "1km"]
+        },
+        {
+          menu: "临川区",
+          items: ["全部", "人民公园"]
+        }
+      ]
+    },
+    height: {
+      type: Array,
+      default: () => [300, 200, 400]
+    },
+    menuItems: {
+      type: Array,
+      default: () => [
+        { selected: "附近" },
+        { selected: "智能排序" },
+        { selected: "筛选" }
+      ]
+    }
+  },
+  created() {
+    this.selectedItems = this.filterMenuList[this.selectedMenu].items;
+  },
+  updated() {
+    this.isItemShow = true;
+  },
+  watch: {
+    selectedMenu(newVal, oldVal) {
+      if (newVal == oldVal) {
+        return;
+      }
+      this.isItemShow = false;
+
+      this.selectedItems = this.filterMenuList[this.selectedMenu].items;
+    }
+  },
   methods: {
-    submitForm(formName) {
-      this.$emit("onFormSubmit");
+    toggle(index) {
+      var type = "";
+      
+      if (this.activeIndex == 0) {
+        this.$set(this.filterItemClass, index - 1, "filter-item-active");
+
+        this.$set(this.filterItemIconClass, index - 1, "el-icon-caret-top");
+
+        this.activeIndex = index;
+
+        type = "open";
+
+        /*
+                //触发打开事件
+                this.$emit("panelOpen", index);
+                */
+      } else if (this.activeIndex == index) {
+        this.$set(this.filterItemClass, index - 1, "filter-item");
+
+        this.$set(this.filterItemIconClass, index - 1, "el-icon-caret-bottom");
+
+        this.activeIndex = 0;
+
+        type = "close";
+
+        /*
+                //触发关闭事件
+                this.$emit("panelClose");*/
+      } else if (this.activeIndex != index) {
+        this.$set(this.filterItemClass, this.activeIndex - 1, "filter-item");
+        this.$set(this.filterItemClass, index - 1, "filter-item-active");
+
+        this.$set(
+          this.filterItemIconClass,
+          this.activeIndex - 1,
+          "el-icon-caret-bottom"
+        );
+        this.$set(this.filterItemIconClass, index - 1, "el-icon-caret-top");
+
+        this.activeIndex = index;
+
+        type = "switch";
+        /*
+                //触发切换事件
+                this.$emit("panelSwitch", index);
+                */
+      }
+
+      //this.$emit('itemClick', index, type);
+      var el = this.$refs.panel;
+      if (type == "open") {
+        this.isShow = true;
+        this.slideOut(el, index - 1);
+      } else if (type == "switch") {
+        this.switch(el, index - 1);
+      } else {
+        this.slideIn(el);
+      }
+    },
+    switch(el, index) {
+      this.$Velocity(
+        el,
+        {
+          height: this.height[index]
+        },
+        {
+          duration: 300
+        }
+      );
+    },
+    slideOut(el, index) {
+      this.$Velocity(
+        el,
+        {
+          height: this.height[index]
+        },
+        {
+          duration: 300
+        }
+      );
+    },
+    slideIn(el) {
+      this.$Velocity(
+        el,
+        {
+          height: 10
+        },
+        {
+          duration: 300,
+          complete: () => {
+            this.isShow = false;
+          }
+        }
+      );
     }
   }
 };
 </script>
 
 <style scoped>
+#filter-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 0.8ch;
+  height: 20px;
+}
 
+.filter-item-active {
+  color: green;
+}
+
+.filter-panel {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+
+  box-shadow: 2px 2px 3px #888888;
+}
+
+.filter-panel .menu {
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-panel .menu .menu-item {
+  display: block;
+
+  padding-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.active {
+  color: red;
+}
+
+.filter-panel .items {
+  overflow-y: auto;
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-panel .items .items-content {
+  display: block;
+
+  padding-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 </style>
