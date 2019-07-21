@@ -1,5 +1,5 @@
 <template>
-  <div class="rent-info-card" @click="$router.push('/rent-info-details/' + cardInfo.house_id)">
+  <div class="rent-info-card" @click="$router.push('/house-details/' + cardInfo.house_id)">
     <el-card>
       <div class="info-card">
         <div class="left">
@@ -22,7 +22,7 @@
 export default {
   data() {
     return {
-      imgUrl: '../../static/image/house/h1-1.jpg'
+      
     }
   },
   props: {

@@ -1,20 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Index from '@/views/index'
-import UserLogin from '@/views/user-login'
-import UserIndex from '@/views/user-index'
+import Index from '@/views/Index/index'
+import HouseSource from '@/views/Index/HouseSource/index'
+import MyOrder from '@/views/Index/MyOrder/index'
+import UserCenter from '@/views/Index/UserCenter/index'
+
+import UserLogin from '@/views/UserLogin/index'
+
 import Demo from '@/views/demo'
 import Demo2 from '@/views/demo2'
-import RentInfoDetails from '@/views/rent-info-details'
+import HouseDetails from '@/views/HouseDetails/index'
 import Search from '@/views/search'
 import SearchResult from '@/views/search-result'
-import ReleaseOrder from '@/views/release-order'
+
+import ReleaseOrder from '@/views/ReleaseOrder/index'
 
 import DemoCom from '@/components/demo-component'
-import HouseSource from '@/components/house-source'
-import MyOrder from '@/components/my-order'
-import UserCenter from '@/components/user-center'
+
 Vue.use(Router)
 
 export default new Router({
@@ -67,12 +70,12 @@ export default new Router({
       }]
     },
     {
-      path: '/rent-info-details/:id',
-      name: 'rent-info-details',
+      path: '/house-details/:id',
+      name: 'house-details',
       meta: {
         index: 4
       },
-      component: RentInfoDetails
+      component: HouseDetails
     },
     {
       path: '/search',

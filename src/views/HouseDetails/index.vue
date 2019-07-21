@@ -7,7 +7,7 @@
       <div class="image-carousel">
         <el-carousel :interval="4000" type="card" height="200px">
           <el-carousel-item v-for="item in 3" :key="item">
-            <img :src="'../../static/image/house/h1-' + item + '.jpg'" />
+            <img :src="'../../../static/image/house/h1-' + item + '.jpg'" />
           </el-carousel-item>
         </el-carousel>
       </div>

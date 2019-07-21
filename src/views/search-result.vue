@@ -12,12 +12,12 @@
             </div>
         </div>
         <common-filter-menu></common-filter-menu>
-        <rent-info-list :num="10" :card-list="cardList"></rent-info-list>
+        <house-info-list :num="10" :card-list="cardList"></house-info-list>
     </div>
 </template>
 
 <script>
-import rentInfoList from '@/components/rent-info-list'
+import HouseInfoList from '@/components/house-info-list'
 import CommonFilterMenu from '@/components/common-filter-menu'
 import cardList from '@/data/cardList.json'
 
@@ -29,7 +29,7 @@ export default {
         }
     },
     components: {
-        rentInfoList,
+        HouseInfoList,
         CommonFilterMenu
     }
 }

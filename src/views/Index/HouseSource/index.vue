@@ -15,7 +15,7 @@
         <common-filter-menu></common-filter-menu>
         <common-scroll :on-refresh="onRefresh">
             <div slot="content">
-              <rent-info-list :num="cardList.length" :card-list="cardList"></rent-info-list>
+              <house-info-list :num="cardList.length" :card-list="cardList"></house-info-list>
             </div>
           </common-scroll>
       </div>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import rentInfoList from "@/components/rent-info-list";
+import HouseInfoList from "@/components/house-info-list";
 import CommonHeader from "@/components/common-header";
 import CommonFilterMenu from "@/components/common-filter-menu";
 import CommonScroll from '@/components/common-scroll'
@@ -82,7 +82,7 @@ export default {
     }
   },
   components: {
-    rentInfoList,
+    HouseInfoList,
     CommonHeader,
     CommonFilterMenu,
     UpDownLayout,

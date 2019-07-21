@@ -12,12 +12,9 @@
 <script>
 import UpDownLayout from "@/components/up-down-layout";
 import CommonHeader from "@/components/common-header";
-import OrderForm from "@/components/order-form";
+import OrderForm from "./order-form";
 
 export default {
-  data() {
-    return {};
-  },
   methods: {
     handleSubmit(form) {
       this.$axios.post(
