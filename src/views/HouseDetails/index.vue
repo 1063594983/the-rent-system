@@ -20,15 +20,14 @@
         <!-- 租赁按钮 -->
         <el-button class="rent-btn" type="text" @click="dialogVisible = true">租赁</el-button>
       </div>
-      
     </up-down-layout>
     <!-- 租赁表单弹出框 -->
-      <el-dialog :visible.sync="dialogVisible" title="租赁" width="80%">
-        <!-- 租赁表单 -->
-        <rent-form :monthly-rent="infoDetails.monthly_rent" @onSubmit="handleSubmit"></rent-form>
-      </el-dialog>
-      <!-- 更多面板 -->
-      <div v-if="isShowMore" class="more">More</div>
+    <el-dialog :visible.sync="dialogVisible" title="租赁" width="80%">
+      <!-- 租赁表单 -->
+      <rent-form :monthly-rent="infoDetails.monthly_rent" @onSubmit="handleSubmit"></rent-form>
+    </el-dialog>
+    <!-- 更多面板 -->
+    <div v-if="isShowMore" class="more">More</div>
   </div>
 </template>
 

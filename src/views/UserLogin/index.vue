@@ -51,6 +51,13 @@ export default {
       }
     };
   },
+  created() {
+    if(this.$cookies.get("username")) {
+      this.$router.push({
+        name: 'index'
+      })
+    }
+  },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {

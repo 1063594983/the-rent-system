@@ -18,8 +18,8 @@ router.all('/*', function(req, res, next) {
 
 router.get('/getHouse', (req, res) => {
 	let params = req.query;
-	let sql = "select * from house order by release_time desc limit 20";
-	conn.query(sql, [], (err, result) => {
+	let sql = "select * from house where state = ? order by release_time desc limit ?";
+	conn.query(sql, ["available", parseInt(params.size)], (err, result) => {
 		if (err) {
 			console.log(err)
 		} else {
@@ -46,8 +46,8 @@ router.get('/getHouseById', (req, res) => {
 
 router.get('/getHouseBefore', (req, res) => {
 	let params = req.query;
-	let sql = "select * from house where release_time < ?";
-	conn.query(sql, [params.release_time], (err, result) => {
+	let sql = "select * from house where release_time < ? and state = ?";
+	conn.query(sql, [params.release_time, "available"], (err, result) => {
 		if (err) {
 			console.log(err)
 		} else {
@@ -61,8 +61,8 @@ router.get('/getHouseBefore', (req, res) => {
 
 router.get('/getHouseAfter', (req, res) => {
 	let params = req.query;
-	let sql = "select * from house where release_time > ? order by release_time";
-	conn.query(sql, [params.release_time], (err, result) => {
+	let sql = "select * from house where release_time > ? and state = ? order by release_time";
+	conn.query(sql, [params.release_time, "available"], (err, result) => {
 		if (err) {
 			console.log(err)
 		} else {

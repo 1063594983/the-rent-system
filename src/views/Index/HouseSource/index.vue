@@ -20,7 +20,7 @@
         <!-- 下拉菜单 -->
         <common-scroll :on-refresh="onRefresh">
           <!-- 内容 -->
-          <div slot="content">
+          <div slot="content" class="content">
             <house-info-list :num="cardList.length" :card-list="cardList"></house-info-list>
           </div>
         </common-scroll>
@@ -92,4 +92,7 @@ export default {
 </script>
 
 <style scoped>
+.content {
+  margin-bottom: 50px;
+}
 </style>

@@ -18,7 +18,7 @@ router.all('/*', function(req, res, next) {
 
 router.get('/getOrders', (req, res) => {
 	let params = req.query;
-	let sql = "select * from house_orders order by release_time desc where renter = ?";
+	let sql = "select * from house_orders where renter = ? order by release_time desc";
 	conn.query(sql, [params.renter], (err, result) => {
 		if (err) {
             console.log(err)
@@ -37,7 +37,15 @@ router.post('/addOrder', (req, res) => {
             console.log (err);
             res.end("Failed");
         } else {
-            res.end("Success");
+			let updateSql = "update house set state = ? where house_id = ?";
+			conn.query(updateSql, ["unavailable", params.house_id], (err, result2) => {
+				if (err) {
+					console.log(err);
+					res.end("Failed");
+				} else {
+					res.end("Success");
+				}
+			})
         }
     })
 })

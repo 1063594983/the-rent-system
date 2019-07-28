@@ -58,7 +58,7 @@
                         <div class="host-name">
                             <div>马云</div>
                             <div>
-                                <el-button size="small">和Ta联系</el-button>
+                                <el-button size="small" @click="$router.push({name: 'dialog'})">和Ta联系</el-button>
                             </div>
                         </div>
                         <div class="ranking">

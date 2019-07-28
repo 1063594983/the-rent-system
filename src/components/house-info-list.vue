@@ -13,9 +13,6 @@ export default {
             type: Array
         }
     },
-    mounted() {
-        this.$refs['infoList'].style.height = (window.innerHeight - 140) + 'px';
-    },
     components: {
         HouseInfoCard
     }    

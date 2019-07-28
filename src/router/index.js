@@ -8,7 +8,12 @@ import UserCenter from '@/views/Index/UserCenter/index'
 
 import UserLogin from '@/views/UserLogin/index'
 
-import Demo from '@/views/demo'
+// 聊天页面
+import Dialog from '@/views/Dialog/index'
+
+// Demo页面
+import Demo from '@/views/Demo/index'
+
 import Demo2 from '@/views/demo2'
 import HouseDetails from '@/views/HouseDetails/index'
 import Search from '@/views/search'
@@ -26,7 +31,7 @@ export default new Router({
     {
       path: '/',
       name: 'indexPage',
-      redirect: '/index'
+      redirect: '/user-login'
     },
     {
       path: '/user-login',
@@ -116,6 +121,14 @@ export default new Router({
         index: 2
       },
       component: ReleaseOrder
+    },
+    {
+      path: '/dialog',
+      name: 'dialog',
+      meta: {
+        index: 5
+      },
+      component: Dialog
     }
   ]
 })

@@ -3,29 +3,9 @@
     <div id="filter-menu">
       <div v-for="(item, index) in menuItems" :key="index">
         <span :class="{'filter-item': true, 'filter-active': activeIndex == index}" @click="toggle(index)">
-          {{ item.selected }}
+          {{ item }}
           <i :class="{'el-icon-caret-bottom': activeIndex != index, 'el-icon-caret-top': activeIndex == index}"></i>
         </span>
-      </div>
-    </div>
-    <div class="filter-panel" v-show="isShow" ref="panel">
-      <div class="menu">
-        <div
-          v-for="(menu, index) in filterMenuList"
-          :key="index"
-          class="menu-item"
-          :class="{'active' : selectedMenu == index}"
-          @click="selectedMenu = index"
-        >{{ menu.menu }}</div>
-      </div>
-      <div v-if="isItemShow" class="items">
-        <div>
-          <div
-            v-for="(item, index) in selectedItems"
-            :key="index"
-            :class="{'items-content' : true, 'animated fadeInUp' : true}"
-          >{{ item }}</div>
-        </div>
       </div>
     </div>
   </div>
@@ -35,64 +15,26 @@
 export default {
   data() {
     return {
-      activeIndex: -1,
-      filterItemClass: ["filter-item", "filter-item", "filter-item"],
-      filterItemIconClass: [
-        "el-icon-caret-bottom",
-        "el-icon-caret-bottom",
-        "el-icon-caret-bottom"
-      ],
-      isShow: false,
-      selectedMenu: 0,
-      selectedItems: [],
-      isItemShow: true
+      activeIndex: -1
     };
   },
   props: {
-    sortMethod: {
-      type: String,
-      default: "智能排序"
-    },
-    filterMenuList: {
-      type: Array,
-      default: () => [
-        {
-          menu: "附近",
-          items: ["附近", "500", "1km"]
-        },
-        {
-          menu: "临川区",
-          items: ["全部", "人民公园"]
-        }
-      ]
-    },
-    height: {
-      type: Array,
-      default: () => [300, 200, 400]
-    },
     menuItems: {
       type: Array,
       default: () => [
-        { selected: "附近" },
-        { selected: "智能排序" },
-        { selected: "筛选" }
+        "附近",
+        "距离最近",
+        "筛选"
       ]
     }
   },
-  created() {
-    this.selectedItems = this.filterMenuList[this.selectedMenu].items;
-  },
-  updated() {
-    this.isItemShow = true;
-  },
   watch: {
-    selectedMenu(newVal, oldVal) {
-      if (newVal == oldVal) {
-        return;
-      }
-      this.isItemShow = false;
-
-      this.selectedItems = this.filterMenuList[this.selectedMenu].items;
+    menuItems(newVal) {
+      this.activeIndex = -1;
+      this.$emit("onSelectMenu", {
+        type: "close",
+        index: -1
+      })
     }
   },
   methods: {
