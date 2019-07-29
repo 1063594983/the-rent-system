@@ -39,9 +39,8 @@ export default {
       }
     },
   methods: {
-     
     handleStart(e) {
-      let scrollTop = this.$refs.drag_panel.children[0].firstChild.scrollTop;
+      let scrollTop = document.documentElement.scrollTop;
       if (scrollTop != 0) {
         this.touching = false;
         return ;
@@ -50,9 +49,8 @@ export default {
       this.touching = true;
     },
     handleMove(e) {
-      let scrollTop = this.$refs.drag_panel.children[0].firstChild.scrollTop;
-      if (scrollTop == 0) {
-      }
+      let scrollTop = document.documentElement.scrollTop;
+
       if (!this.touching) {
         return;
       }

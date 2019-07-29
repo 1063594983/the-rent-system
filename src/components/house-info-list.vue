@@ -22,6 +22,6 @@ export default {
 <style scoped>
 .rent-info-list {
     margin-top: 20px;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 </style>
