@@ -54,7 +54,7 @@ export default {
   created() {
     if(this.$cookies.get("username")) {
       this.$router.push({
-        name: 'index'
+        name: 'house-source'
       })
     }
   },

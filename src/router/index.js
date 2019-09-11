@@ -55,21 +55,24 @@ export default new Router({
         path: 'house-source',
         name: 'house-source',
         meta: {
-          index: 1
+          index: 1,
+          scrollTop: 0
         },
         component: HouseSource
       }, {
         path: 'my-order',
         name: 'my-order',
         meta: {
-          index: 1
+          index: 1,
+          scrollTop: 0
         },
         component: MyOrder
       }, {
         path: 'user-center',
         name: 'user-center',
         meta: {
-          index: 1
+          index: 1,
+          scrollTop: 0
         },
         component: UserCenter
       }]

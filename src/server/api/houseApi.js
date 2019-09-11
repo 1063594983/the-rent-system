@@ -4,6 +4,8 @@ const router = express.Router();
 const models = require('../db');
 const mysql = require('mysql');
 
+var http=require("http");
+
 // 连接数据库
 var conn = mysql.createConnection(models.mysql);
 conn.connect();
@@ -84,6 +86,19 @@ router.post('/releaseHouse', (req, res) => {
             res.end("Success");
         }
     })
+})
+
+router.get('/getPlace', (req, res) => {
+	console.log('hello')
+	http.get("http://api.map.baidu.com/place/v2/suggestion?query=长亭&region=上海&city_limit=true&output=json&ak=k2EYGytzdGHZanU2b3HRWiY6Bby1GNjt", (data) => {
+		var str = "";
+		data.on("data", (chunk) => {
+			str += chunk;
+		})
+		data.on("end", () => {
+			res.end(str);
+		})
+	})
 })
 
 /*

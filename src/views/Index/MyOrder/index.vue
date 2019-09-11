@@ -2,12 +2,14 @@
   <up-down-layout>
     <div slot="header">
       <common-header :show-back="false" 
-            :show-right="false"
-            title="我的订单">
+            :show-right="true"
+            title="我的订单"
+            :right-method="show">
       </common-header>
     </div>
+    <!-- 我的订单列表 -->
     <div slot="body" class="content">
-      <order-card-list :order-list="orderList"></order-card-list>
+      <order-card-list :order-list="orderList" ref="order_list"></order-card-list>
     </div>
   </up-down-layout>
 </template>
@@ -23,13 +25,25 @@ export default {
     };
   },
   created() {
-    this.$axios.get(this.$api + "/order/getOrders", {
+    console.log(this.$route.meta.scrollTop)
+    if (this.$route.meta.scrollTop == 0) {
+      this.$axios.get(this.$api + "/order/getOrders", {
       params: {
         renter: this.$cookies.get("username")
       }
     }).then(res => {
       this.orderList = res.data;
     })
+    } else {
+      document.documentElement.scrollTop = this.$route.meta.scrollTop;
+    }
+    
+  },
+
+  methods: {
+    show() {
+      console.log(document.documentElement.scrollTop)
+    }
   },
   components: {
     OrderCardList,

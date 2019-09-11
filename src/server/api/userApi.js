@@ -46,6 +46,20 @@ router.post('/addOrder', (req, res) => {
     })
 })
 
+// 获取用户信息
+router.get('/userInfo', (req, res) => {
+	let params = req.query;
+	let sql = "select * from user_info where username = ?";
+	conn.query(sql, [params.username], (err, result) => {
+		if (err) {
+			console.log(err);
+			res.end('Failed');
+		} else {
+			res.end(JSON.stringify(result[0]));
+		}
+	})
+})
+
 
 /*
 router.get('/getCommentByGoods', (req, res) => {

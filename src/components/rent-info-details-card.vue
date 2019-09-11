@@ -56,7 +56,7 @@
                     </div>
                     <div class="contact-details">
                         <div class="host-name">
-                            <div>马云</div>
+                            <div>{{ hostInfo.nickname }}</div>
                             <div>
                                 <el-button size="small" @click="$router.push({name: 'dialog'})">和Ta联系</el-button>
                             </div>
@@ -65,7 +65,7 @@
                             <el-rate :value="2" :disabled="true"></el-rate>
                         </div>
                         <div class="phone-number">
-                            手机: 18312342818
+                            手机: {{ hostInfo.phone }}
                         </div>
                     </div>
                 </div>
@@ -100,6 +100,9 @@ export default {
                 }
 
             }
+        },
+        hostInfo: {
+            type: Object
         }
     },
     created() {

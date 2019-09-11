@@ -12,9 +12,7 @@
           </div>
           <div class="info-btn">
             <el-button>个人资料</el-button>
-            <el-button @click="$router.push({
-              name: 'user-login'
-            })">退出登录</el-button>
+            <el-button @click="logout">退出登录</el-button>
           </div>
         </div>
         <div class="user-tabs">
@@ -44,10 +42,13 @@
 import cardList from "@/data/cardList.json";
 
 export default {
-  data() {
-    return {
-
-    };
+  methods: {
+    logout() {
+      this.$cookies.set("username", "");
+      this.$router.push({
+        name: 'user-login'
+      })
+    }
   }
 };
 </script>

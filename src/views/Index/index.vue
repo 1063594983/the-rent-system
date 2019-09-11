@@ -21,7 +21,7 @@ import UpDownLayout from '@/components/up-down-layout'
 export default {
   data() {
     return {
-      tableIndex: 0,
+      tableIndex: -1,
       footerItems: ["房源", "我的订单", "个人中心"],
       urls: ["house-source", "my-order", "user-center"]
     };
@@ -34,10 +34,12 @@ export default {
   created() {
       var cur = this.$route.name;
       var index = this.urls.indexOf(cur);
-      this.tableIndex = index;
+      this.tableIndex = index == -1 ? 0 : index;
   },
   watch: {
       tableIndex(newVal) {
+        let scrollTop = document.documentElement.scrollTop;
+        this.$route.meta.scrollTop = scrollTop;
           this.$router.push({
               name: this.urls[newVal]
           });

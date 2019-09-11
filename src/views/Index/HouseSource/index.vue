@@ -35,7 +35,7 @@ import CommonHeader from "@/components/common-header";
 import FilterMenu from "./filter-menu";
 import CommonScroll from "@/components/common-scroll";
 import UpDownLayout from "@/components/up-down-layout";
-
+import EthLayer from "../../../utils/EthLayer.js";
 export default {
   data() {
     return {
@@ -52,9 +52,75 @@ export default {
       })
       .then(res => {
         this.cardList = res.data;
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            position => {
+              console.log(position.coords);
+              var location = {};
+              location.lat = position.coords.latitude;
+              location.lng = position.coords.longitude;
+              this.cardList.forEach(value => {
+                var location2 = value.details.location;
+                console.log(
+                  "(" +
+                    location.lat +
+                    "," +
+                    location.lng +
+                    ")-(" +
+                    location2.lat +
+                    "," +
+                    location2.lng +
+                    ")"
+                );
+                console.log(
+                  value.details.address +
+                    " " +
+                    this.getDistance(
+                      location.lat,
+                      location2.lat,
+                      location.lng,
+                      location2.lng
+                    )
+                );
+              });
+            },
+            err => {
+              console.log(err);
+            },
+            { enableHighAccuracy: true }
+          );
+        } else {
+          // console.log('error')
+        }
+        // console.log(this.cardList[0].details.location)
       });
   },
+  mounted() {
+    // eth.getUserCredit()
+  },
   methods: {
+    getDistance(lat1, lat2, lng1, lng2) {
+      function rad(d) {
+        return (d * Math.PI) / 180.0;
+      }
+      let radLat1 = rad(lat1);
+      let radLat2 = rad(lat2);
+      let a = radLat1 - radLat2;
+      let b = rad(lng1) - rad(lng2);
+      let s =
+        2 *
+        Math.asin(
+          Math.sqrt(
+            Math.pow(Math.sin(a / 2), 2) +
+              Math.cos(radLat1) *
+                Math.cos(radLat2) *
+                Math.pow(Math.sin(b / 2), 2)
+          )
+        );
+      s = s * 6378.137; // EARTH_RADIUS;
+      s = Math.round(s * 10000) / 10000; //输出为公里
+      return s;
+    },
     // 下拉刷新时加载新房源信息
     onRefresh(done) {
       this.$axios

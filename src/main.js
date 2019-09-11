@@ -44,14 +44,24 @@ Vue.use(VueJsonp)
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
 
+// 引入store
+import store from './store'
 new Vue({
   el: '#app',
+  store,
   router,
   components: { App },
   template: '<App/>'
 })
 
-
+// import contract from 'truffle-contract'
+const marketplaceArtifacts = require('./Marketplace.json')
+let provider = window.web3.currentProvider;
+let marketplaceContract = window.web3.eth.contract([])
+let instance = marketplaceContract.at("0x3444D2bcCa980B1DbDc41528053392a4911c8dDe")
+// console.log(instance);
+// console.log(window.web3)
+// console.log(contract)
 //var Web3 = require('web3');
 /*
 import UserFactory from "./contracts/UserFactory.json";

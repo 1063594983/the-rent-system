@@ -16,7 +16,7 @@
           </el-carousel>
         </div>
         <!-- 房屋详细信息、房东信息及联系面板 -->
-        <rent-info-details-card :info-details="infoDetails" v-if="finished"></rent-info-details-card>
+        <rent-info-details-card :info-details="infoDetails" :host-info="hostInfo" v-if="finished"></rent-info-details-card>
         <!-- 租赁按钮 -->
         <el-button class="rent-btn" type="text" @click="dialogVisible = true">租赁</el-button>
       </div>
@@ -43,6 +43,7 @@ export default {
     return {
       isShowMore: false,
       infoDetails: {},
+      hostInfo: {},
       finished: false,
       dialogVisible: false,
       monthNum: 1,
@@ -50,6 +51,7 @@ export default {
     };
   },
   created() {
+    // 获取房屋信息
     this.$axios
       .get(this.$api + "/house/getHouseById", {
         params: {
@@ -58,7 +60,17 @@ export default {
       })
       .then(res => {
         this.infoDetails = res.data;
-        this.finished = true;
+        // 获取房东信息
+        this.$axios
+          .get(this.$api + "/user/userInfo", {
+            params: {
+              username: this.infoDetails.owner
+            }
+          })
+          .then(res2 => {
+            this.hostInfo = res2.data;
+            this.finished = true;
+          });
       });
   },
   methods: {

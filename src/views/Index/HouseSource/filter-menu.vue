@@ -37,76 +37,13 @@
 
 <script>
 import MyFilterMenu from "@/components/my-filter-menu";
+import filterMenuList from './place.json'
+// var filterMenuList = require('./place.json')
 export default {
   data() {
     return {
       height: [250, 150, 300],
-      filterMenuList: [
-        {
-          menu: "附近",
-          items: ["附近", "500", "1km"]
-        },
-        {
-          menu: "临川区",
-          items: ["全部", "人民公园"]
-        },
-        {
-          menu: "附近",
-          items: ["附近", "500", "1km"]
-        },
-        {
-          menu: "临川区",
-          items: ["全部", "人民公园"]
-        },
-        {
-          menu: "附近",
-          items: ["附近", "500", "1km"]
-        },
-        {
-          menu: "临川区",
-          items: ["全部", "人民公园"]
-        },
-        {
-          menu: "附近",
-          items: ["附近", "500", "1km"]
-        },
-        {
-          menu: "临川区",
-          items: ["全部", "人民公园"]
-        },
-        {
-          menu: "附近",
-          items: ["附近", "500", "1km"]
-        },
-        {
-          menu: "临川区",
-          items: ["全部", "人民公园"]
-        },
-        {
-          menu: "附近",
-          items: ["附近", "500", "1km"]
-        },
-        {
-          menu: "临川区",
-          items: ["全部", "人民公园"]
-        },
-        {
-          menu: "附近",
-          items: ["附近", "500", "1km"]
-        },
-        {
-          menu: "临川区",
-          items: ["全部", "人民公园"]
-        },
-        {
-          menu: "附近",
-          items: ["附近", "500", "1km"]
-        },
-        {
-          menu: "临川区",
-          items: ["全部", "人民公园"]
-        }
-      ],
+      filterMenuList: filterMenuList,
       selectedMenu: 0,
       selectedIndex: -1,
       selectedMethod: 0,
